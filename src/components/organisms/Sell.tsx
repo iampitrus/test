@@ -1,8 +1,6 @@
 import Pay from "../molecules/Pay";
 import { LuArrowDownCircle } from "react-icons/lu";
 import Received from "../molecules/Received";
-import TextInput from "../atoms/TextInput";
-import { RiExchangeLine } from "react-icons/ri";
 import Button from "../atoms/UserButton";
 import { useNavigate } from "react-router-dom";
 import CurrentRate from "../atoms/CurrentRate";
