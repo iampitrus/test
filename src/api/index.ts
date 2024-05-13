@@ -9,7 +9,9 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
+
     prepareHeaders: (headers, { getState }) => {
+      headers.set("mode", "no-cors");
       const accessRedux = (getState() as RootState).auth.accessToken;
       const userlocalStorage = JSON.parse(Cookies.get("user") || "{}");
 

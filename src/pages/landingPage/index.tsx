@@ -12,7 +12,7 @@ import { useGetSupportedBanksQuery } from "../../api/offRamp";
 
 const Homepage = () => {
   const showAuth = useSelector(selectAuth).showAuth;
-  const { data } = useGetSupportedBanksQuery();
+  const { data, error } = useGetSupportedBanksQuery();
 
   return (
     <div className="relative flex flex-col gap-[3rem] justify-content items-center">
@@ -20,8 +20,11 @@ const Homepage = () => {
       {showAuth && <Auth />}
       <Intro />
       <button
-        onClick={() => console.log(data)}
-        className="bg-gray-500 my-2 px-4 hover:scale-105"
+        onClick={() => {
+          console.log("data", data);
+          console.log("Error", error);
+        }}
+        className="bg-gray-500 my-2 px-4 rounded-lg hover:scale-105"
       >
         Check the api
       </button>
