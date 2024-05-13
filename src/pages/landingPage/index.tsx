@@ -8,16 +8,21 @@ import SwapScreen from "../../components/organisms/SwapScreen";
 import Auth from "./auth/Auth";
 import { useSelector } from "react-redux";
 import { selectAuth } from "../../redux/authSlice";
+import { useGetSupportedBanksQuery } from "../../api/offRamp";
 
 const Homepage = () => {
   const showAuth = useSelector(selectAuth).showAuth;
+  const { data } = useGetSupportedBanksQuery();
 
   return (
     <div className="relative flex flex-col gap-[3rem] justify-content items-center">
       <Navbar />
       {showAuth && <Auth />}
       <Intro />
-      <button className="bg-gray-500 my-2 px-4 hover:scale-105">
+      <button
+        onClick={() => console.log(data)}
+        className="bg-gray-500 my-2 px-4 hover:scale-105"
+      >
         Check the api
       </button>
       <SwapScreen />
