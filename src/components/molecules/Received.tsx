@@ -13,14 +13,14 @@ const Received = ({ value, sell }: { value?: number; sell?: boolean }) => {
       </div>
       {sell ? (
         <Input
-          data={"fiat"}
+          data={"crypto"}
           inputType={"primary"}
           value={value}
           type="number"
         />
       ) : (
         <Input
-          data={"fiat"}
+          data={"crypto"}
           inputType={"secondary"}
           value={value}
           type="number"

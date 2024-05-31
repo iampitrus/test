@@ -23,7 +23,7 @@ const Input = ({
     case "primary":
       return (
         <div className="w-full flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderPrimary md:w-[400px]">
-          <Dropdown data={data} />
+          <Dropdown dataType={data} />
           <input
             className="w-full px-3 text-end text-white outline-none border-none bg-transparent"
             type={type}
@@ -37,7 +37,7 @@ const Input = ({
     case "secondary":
       return (
         <label className="w-full flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderSecondary md:w-[400px]">
-          <Dropdown data={data} none />
+          <Dropdown dataType={data} none />
           <p className="w-full text-end outline-none border-none bg-transparent px-3 text-white">
             {converted_amt}
           </p>

@@ -7,14 +7,14 @@ const Pay = ({ value, sell }: { value?: number; sell?: boolean }) => {
       <TextInput>Pay</TextInput>
       {sell ? (
         <Input
-          data={"crypto"}
+          data={"fiat"}
           inputType={"secondary"}
           value={value}
           type="number"
         />
       ) : (
         <Input
-          data={"crypto"}
+          data={"fiat"}
           inputType={"primary"}
           value={value}
           type="number"

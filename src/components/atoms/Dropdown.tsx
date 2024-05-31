@@ -1,17 +1,27 @@
 import { useState } from "react";
 import { useGetSupportedCurrenciesQuery } from "../../api/offRamp";
 import { useDispatch } from "react-redux";
-import { setChosenPair } from "../../redux/userSlice";
+import { setCrypto, setFiat } from "../../redux/userSlice";
 
-function Dropdown({ none, data }: { none?: boolean; data: "fiat" | "crypto" }) {
+function Dropdown({
+  none,
+  dataType,
+}: {
+  none?: boolean;
+  dataType: "fiat" | "crypto";
+}) {
   const { data: currencyData, isSuccess } = useGetSupportedCurrenciesQuery();
 
   const [value, setValue] = useState("");
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   function handleChange(e: any) {
     setValue(e.target.value);
-    // dispatch(setChosenPair(e.target.value));
+    if (dataType == "crypto") {
+      dispatch(setCrypto(e.target.value));
+    } else {
+      dispatch(setFiat(e.target.value));
+    }
   }
 
   return (
@@ -19,19 +29,20 @@ function Dropdown({ none, data }: { none?: boolean; data: "fiat" | "crypto" }) {
       <div className="w-[20px] h-[20px] absolute rounded-full bg-white"></div>
       {isSuccess ? (
         <select
+          id="dropdown"
           style={none && { appearance: "none", marginLeft: "25px" }}
           className="w-full ml-5 border-none m-0 outline-none text-white bg-boxcolor font-bold"
           value={value}
           onChange={handleChange}
         >
-          {data === "fiat" &&
-            currencyData.data.incomingCurrencies.map((currency, index) => (
+          {dataType === "fiat" &&
+            currencyData.data.outgoingCurrencies.map((currency, index) => (
               <option key={index} value={currency}>
                 {currency}
               </option>
             ))}
-          {data === "crypto" &&
-            currencyData.data.outgoingCurrencies.map((currency, index) => (
+          {dataType === "crypto" &&
+            currencyData.data.incomingCurrencies.map((currency, index) => (
               <option key={index} value={currency}>
                 {currency}
               </option>
@@ -43,7 +54,7 @@ function Dropdown({ none, data }: { none?: boolean; data: "fiat" | "crypto" }) {
         </select>
       ) : (
         <p className="absolute left-6 text-xs text-gray-400">
-          {data == "fiat" ? "loading fiat..." : "loading crypto..."}
+          {dataType == "fiat" ? "loading fiat..." : "loading crypto..."}
         </p>
       )}
     </div>
