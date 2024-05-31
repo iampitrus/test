@@ -5,7 +5,7 @@ function CurrentRate() {
   return (
     <div className="flex items-center gap-2">
       <TextInput> 1 NGN = 1.005</TextInput>
-      <RiExchangeLine size={30} className="text-white" />
+      <RiExchangeLine size={20} className="text-white" />
     </div>
   );
 }

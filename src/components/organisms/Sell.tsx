@@ -10,13 +10,15 @@ const Sell = () => {
   const handleSell = () => {
     navigate("/user/bank-details");
   };
+
+  let converted_amt = 0;
+
   return (
     <div className="flex flex-col justify-center items-center gap-5">
-      <Received />
+      <Received sell />
       <LuArrowDownCircle className="text-white" />
-      <Pay />
+      <Pay sell value={converted_amt} />
       <CurrentRate />
-
       <Button onclick={handleSell}>Confirm Order</Button>
     </div>
   );

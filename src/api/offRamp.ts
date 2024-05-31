@@ -5,16 +5,29 @@ type Details = {
   bankCode: number;
 };
 
+export type Currencies = {
+  success: boolean;
+  data: {
+    incomingCurrencies: [];
+    outgoingCurrencies: [];
+  };
+};
+
+type Banks = {
+  success: boolean;
+  data: { code: number; Name: string }[];
+};
+
 const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getSupportedCurrencies: builder.query<any, void>({
+    getSupportedCurrencies: builder.query<Currencies, void>({
       query: () => ({
         method: "GET",
         url: "off-ramp/get-supported-currencies",
       }),
     }),
 
-    getSupportedBanks: builder.query<any, void>({
+    getSupportedBanks: builder.query<Banks, void>({
       query: () => ({
         method: "GET",
         url: "off-ramp/get-supported-banks",

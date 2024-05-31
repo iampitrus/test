@@ -1,54 +1,46 @@
-import { IoIosArrowDown } from "react-icons/io";
+import { useState } from "react";
+import Dropdown from "./Dropdown";
 const Input = ({
   inputType,
   type,
   name,
   id,
-  onChange,
   placeholder,
   label,
   value,
   className,
+  data,
 }: any) => {
+  const [amount, setAmount] = useState(null);
+
+  function onChange(e: any) {
+    setAmount(e.target.value);
+  }
+
+  const converted_amt = 10;
+
   switch (inputType) {
     case "primary":
       return (
-        <label className="w-[250px] flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderPrimary md:w-[400px]">
-          <div className="flex justify-between w-[80px]  items-center">
-            <div className="flex items-center gap-[5px]">
-              <div className="w-[20px] h-[20px] rounded-full bg-white"></div>
-              <p className="font-bold text-white">USDC</p>
-            </div>
-
-            <div className="translate-x-[20px]">
-              <IoIosArrowDown className="text-white" />
-            </div>
-          </div>
+        <div className="w-full flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderPrimary md:w-[400px]">
+          <Dropdown data={data} />
           <input
-            className="w-[5rem] outline-none border-none bg-transparent"
+            className="w-full px-3 text-end text-white outline-none border-none bg-transparent"
             type={type}
             name={name}
             id={id}
             onChange={onChange}
             placeholder="Amount"
           />
-        </label>
+        </div>
       );
     case "secondary":
       return (
-        <label className="w-[250px] flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderSecondary md:w-[400px]">
-          <div className="flex gap-[5px] items-center">
-            <div className="w-[20px] h-[20px] rounded-full bg-white"></div>
-            <p className="font-bold text-white">NGN</p>
-          </div>
-          <input
-            className="w-[5rem] outline-none border-none bg-transparent px-3"
-            type={type}
-            name={name}
-            id={id}
-            onChange={onChange}
-            placeholder="Amount"
-          />
+        <label className="w-full flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderSecondary md:w-[400px]">
+          <Dropdown data={data} none />
+          <p className="w-full text-end outline-none border-none bg-transparent px-3 text-white">
+            {converted_amt}
+          </p>
         </label>
       );
     case "field":

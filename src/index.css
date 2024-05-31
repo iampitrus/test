@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Resets */
+
 * {
   margin: 0;
   padding: 0;
@@ -11,4 +13,17 @@
 }
 body {
   background: #1a1a1a;
+}
+
+/* Input field type number reset */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  appearance: textfield;
 }
