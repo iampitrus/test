@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
+import { useDispatch } from "react-redux";
+import { setAmount } from "../../redux/userSlice";
 const Input = ({
   inputType,
   type,
@@ -10,14 +12,14 @@ const Input = ({
   value,
   className,
   data,
+  convertedAmt,
 }: any) => {
-  const [amount, setAmount] = useState(null);
+  const dispatch = useDispatch();
 
-  function onChange(e: any) {
-    setAmount(e.target.value);
+  function handleChange(e: any) {
+    // Store the input value so it can be used in other components
+    dispatch(setAmount(e.target.value));
   }
-
-  const converted_amt = 10;
 
   switch (inputType) {
     case "primary":
@@ -29,7 +31,7 @@ const Input = ({
             type={type}
             name={name}
             id={id}
-            onChange={onChange}
+            onChange={handleChange}
             placeholder="Amount"
           />
         </div>
@@ -39,7 +41,7 @@ const Input = ({
         <label className="w-full flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderSecondary md:w-[400px]">
           <Dropdown dataType={data} none />
           <p className="w-full text-end outline-none border-none bg-transparent px-3 text-white">
-            {converted_amt}
+            {convertedAmt}
           </p>
         </label>
       );

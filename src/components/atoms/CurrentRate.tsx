@@ -1,31 +1,19 @@
 import { RiExchangeLine } from "react-icons/ri";
 import TextInput from "./TextInput";
-import { useGetCurrentRatesQuery } from "../../api/offRamp";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getChosenPair,
-  selectUser,
-  setCrypto,
-  setFiat,
-} from "../../redux/userSlice";
+import { selectUser, setCrypto, setFiat } from "../../redux/userSlice";
 import { useLocation } from "react-router-dom";
+import useGetCurrentRate from "../../hooks/useGetCurrentRate";
 
 function CurrentRate() {
-  const { data, isSuccess } = useGetCurrentRatesQuery();
-  const [rate, setRate] = useState("");
+  const { rate } = useGetCurrentRate();
 
   const dispatch = useDispatch();
-  const pair = useSelector(selectUser)?.pair;
   const crypto = useSelector(selectUser)?.crypto;
   const fiat = useSelector(selectUser)?.fiat;
 
   const location = useLocation();
-
-  useEffect(() => {
-    dispatch(getChosenPair());
-    setRate(data?.data[pair]?.rate);
-  }, [isSuccess, crypto, fiat, pair, location]);
 
   useEffect(() => {
     if (location.pathname === "/user/sell") {
