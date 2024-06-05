@@ -1,8 +1,8 @@
 import { api } from ".";
 
 type Details = {
-  accountNumber: number;
-  bankCode: number;
+  accountNumber: string;
+  bankCode: string;
 };
 
 export type Currencies = {
@@ -15,7 +15,7 @@ export type Currencies = {
 
 type Banks = {
   success: boolean;
-  data: { code: number; Name: string }[];
+  data: { Code: number; Name: string }[];
 };
 
 const authApi = api.injectEndpoints({

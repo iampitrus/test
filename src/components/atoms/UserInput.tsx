@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Dropdown from "./Dropdown";
 import { useDispatch } from "react-redux";
 import { setAmount } from "../../redux/userSlice";
@@ -9,10 +8,12 @@ const Input = ({
   id,
   placeholder,
   label,
-  value,
   className,
   data,
+  value,
+  onChange,
   convertedAmt,
+  disabled,
 }: any) => {
   const dispatch = useDispatch();
 
@@ -51,7 +52,13 @@ const Input = ({
           <label className="text-headercolor font-Poppins text-[14px]">
             {label}
           </label>
-          <h3 className="font-Rubik text-[16px] text-white">{value}</h3>
+          <input
+            disabled={disabled}
+            value={value}
+            type={type}
+            onChange={onChange}
+            className="font-Rubik bg-transparent p-2 rounded-lg border text-[16px] text-white"
+          />
         </div>
       );
 
