@@ -6,11 +6,17 @@ const initialState: {
   fiat: string;
   pair: string;
   amount: number;
+  acctDetails: {
+    name: string;
+    accountnumber: string;
+    accountname: string;
+  };
 } = {
   crypto: "BTC",
   fiat: "NGN",
   pair: "",
   amount: 0,
+  acctDetails: { name: "", accountnumber: "", accountname: "" },
 };
 
 const userSlice = createSlice({
@@ -29,12 +35,15 @@ const userSlice = createSlice({
     setAmount: (state, action) => {
       state.amount = action.payload;
     },
+    setAcctDetails: (state, action) => {
+      state.acctDetails = action.payload;
+    },
   },
 });
 
 export const selectUser = (state: RootState) => state.user;
 
-export const { getChosenPair, setCrypto, setFiat, setAmount } =
+export const { getChosenPair, setCrypto, setFiat, setAmount, setAcctDetails } =
   userSlice.actions;
 
 export default userSlice.reducer;

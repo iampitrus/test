@@ -8,6 +8,8 @@ import {
   useGetSupportedBanksQuery,
   useResolveBankMutation,
 } from "../../api/offRamp";
+import { useDispatch } from "react-redux";
+import { setAcctDetails } from "../../redux/userSlice";
 
 const InputBank = () => {
   const [options, setOptions] = useState({} as any);
@@ -27,9 +29,13 @@ const InputBank = () => {
     },
   ] = useResolveBankMutation();
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleInputBank = () => {
+    if (!resolveSuccess) return;
+
+    dispatch(setAcctDetails(resolveDetails?.data?.data));
     navigate("/user/review-sell");
   };
 
@@ -61,7 +67,8 @@ const InputBank = () => {
 
   useEffect(() => {
     if (resolveError) {
-      setBankDetails({ accountNumber: "", bankCode: "" });
+      // reset account number
+      setBankDetails({ ...bankDetails, accountNumber: "" });
     }
   }, [resolveError]);
 
@@ -86,7 +93,7 @@ const InputBank = () => {
       {resolveLoading && <TextInput>Verifying Account...</TextInput>}
       {resolveError && (
         <TextInput>
-          Account not verified. Check credentials and try again
+          Account not verified. Check credentials and try again!
         </TextInput>
       )}
       <Button onclick={handleInputBank}>Confirm</Button>
