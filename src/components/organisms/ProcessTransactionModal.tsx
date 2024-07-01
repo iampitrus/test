@@ -34,7 +34,11 @@ function ProcessTransactionModal({ state, convertedAmt, type }: Props) {
         }
         className="border-2 rounded-full boder aspect-square w w-40 flex items-center justify-center"
       >
-        <img src={src} alt={state} />
+        {state == "pending" ? (
+          <img className="animate-rotate-infinite" src={src} alt={state} />
+        ) : (
+          <img src={src} alt={state} />
+        )}
       </div>
       <div>
         <h1 className="text-2xl text-center text-white font-bold">

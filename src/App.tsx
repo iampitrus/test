@@ -15,21 +15,19 @@ import {
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/user" element={<AppLayout />}>
-          <Route index element={<Buyer />} />
-          <Route path="ourbank" element={<BankTransfer />} />
-          <Route path="review" element={<ReviewTransaction />} />
-          <Route path="sell" element={<Seller />} />
-          <Route path="input-email" element={<InputEmail />} />
-          <Route path="bank-details" element={<BankDetails />} />
-          <Route path="review-sell" element={<ReviewTranSeller />} />
-          <Route path="send-crypto" element={<SendCryptoAddress />} />
-        </Route>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/user" element={<AppLayout />}>
+        <Route index element={<Buyer />} />
+        <Route path="ourbank" element={<BankTransfer />} />
+        <Route path="review" element={<ReviewTransaction />} />
+        <Route path="sell" element={<Seller />} />
+        <Route path="input-email" element={<InputEmail />} />
+        <Route path="bank-details" element={<BankDetails />} />
+        <Route path="send-crypto" element={<SendCryptoAddress />} />
+        <Route path="review-sell" element={<ReviewTranSeller />} />
+      </Route>
+    </Routes>
   );
 }
 
