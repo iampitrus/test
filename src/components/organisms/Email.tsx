@@ -11,7 +11,7 @@ const Email = () => {
 
   const handleBank = () => {
     if (!emailAddress) return;
-    navigate("/user/review-sell");
+    navigate("/user/send-crypto");
   };
   return (
     <div className="flex w-full flex-col gap-10">
