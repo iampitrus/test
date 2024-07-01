@@ -1,6 +1,6 @@
 import Button from "../atoms/UserButton";
 import Input from "../atoms/UserInput";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TextInput from "../atoms/TextInput";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
@@ -8,14 +8,20 @@ import {
   useGetSupportedBanksQuery,
   useResolveBankMutation,
 } from "../../api/offRamp";
-import { useDispatch } from "react-redux";
-import { setAcctDetails } from "../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, setAcctDetails } from "../../redux/userSlice";
 
 const InputBank = () => {
+  const accountDetails = useSelector(selectUser)?.acctDetails;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [options, setOptions] = useState({} as any);
   const [bankDetails, setBankDetails] = useState({
-    accountNumber: "",
-    bankCode: "",
+    accountNumber: accountDetails.accountnumber,
+    bankCode: accountDetails.code,
   });
 
   const { data: supportedBanks, isSuccess } = useGetSupportedBanksQuery();
@@ -29,14 +35,11 @@ const InputBank = () => {
     },
   ] = useResolveBankMutation();
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const handleInputBank = () => {
     if (!resolveSuccess) return;
 
     dispatch(setAcctDetails(resolveDetails?.data?.data));
-    navigate("/user/review-sell");
+    navigate("/user/input-email");
   };
 
   const verifyAccount = () => {
@@ -63,7 +66,7 @@ const InputBank = () => {
     if (bankDetails.accountNumber.length === 10 && bankDetails.bankCode) {
       verifyAccount();
     }
-  }, [isSuccess, bankDetails, resolveError]);
+  }, [isSuccess, bankDetails, location.pathname, resolveError]);
 
   useEffect(() => {
     if (resolveError) {
@@ -75,6 +78,10 @@ const InputBank = () => {
   return (
     <div className="flex flex-col gap-4">
       <Select
+        defaultValue={{
+          value: accountDetails.code,
+          label: accountDetails.name,
+        }}
         onChange={(e: any) =>
           setBankDetails({ ...bankDetails, bankCode: e.value })
         }

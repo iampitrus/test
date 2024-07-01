@@ -18,6 +18,19 @@ type Banks = {
   data: { Code: number; Name: string }[];
 };
 
+type InitPayment = {
+  businessId: string;
+  incomingCurrency: string;
+  incomingAmount: number;
+  outgoingCurrency: string;
+  paymentType: string;
+  country: string;
+  accountNumber: string;
+  accountName: string;
+  bank: string;
+  bankCode: string;
+};
+
 const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getSupportedCurrencies: builder.query<Currencies, void>({
@@ -48,6 +61,13 @@ const authApi = api.injectEndpoints({
         body,
       }),
     }),
+    createPayment: builder.mutation({
+      query: (body: InitPayment) => ({
+        method: "POST",
+        url: "off-ramp/initiate-payment",
+        body,
+      }),
+    }),
   }),
   overrideExisting: true,
 });
@@ -57,4 +77,5 @@ export const {
   useGetSupportedBanksQuery,
   useGetSupportedCurrenciesQuery,
   useResolveBankMutation,
+  useCreatePaymentMutation,
 } = authApi;

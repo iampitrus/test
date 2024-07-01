@@ -58,6 +58,7 @@ const Input = ({
             type={type}
             onChange={onChange}
             className="font-Rubik bg-transparent p-2 rounded-lg border text-[16px] text-white"
+            placeholder={placeholder}
           />
         </div>
       );
