@@ -6,6 +6,7 @@ import {
   BankDetails,
   BankTransfer,
   Buyer,
+  InputEmail,
   ReviewTranSeller,
   ReviewTransaction,
   Seller,
@@ -22,6 +23,7 @@ function App() {
           <Route path="ourbank" element={<BankTransfer />} />
           <Route path="review" element={<ReviewTransaction />} />
           <Route path="sell" element={<Seller />} />
+          <Route path="input-email" element={<InputEmail />} />
           <Route path="bank-details" element={<BankDetails />} />
           <Route path="review-sell" element={<ReviewTranSeller />} />
           <Route path="send-crypto" element={<SendCryptoAddress />} />
