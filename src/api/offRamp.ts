@@ -31,7 +31,7 @@ type InitPayment = {
   bankCode: string;
 };
 
-const authApi = api.injectEndpoints({
+const offRampApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getSupportedCurrencies: builder.query<Currencies, void>({
       query: () => ({
@@ -69,7 +69,6 @@ const authApi = api.injectEndpoints({
       }),
     }),
   }),
-  overrideExisting: true,
 });
 
 export const {
@@ -78,4 +77,4 @@ export const {
   useGetSupportedCurrenciesQuery,
   useResolveBankMutation,
   useCreatePaymentMutation,
-} = authApi;
+} = offRampApi;

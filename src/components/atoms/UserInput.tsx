@@ -14,6 +14,7 @@ const Input = ({
   onChange,
   convertedAmt,
   disabled,
+  noBorder,
 }: any) => {
   const dispatch = useDispatch();
 
@@ -57,7 +58,9 @@ const Input = ({
             value={value}
             type={type}
             onChange={onChange}
-            className="font-Rubik bg-transparent p-2 rounded-lg border text-[16px] text-white"
+            className={`${
+              noBorder && "border-none"
+            } font-Rubik bg-transparent p-2 rounded-lg border text-[16px] text-white`}
             placeholder={placeholder}
           />
         </div>

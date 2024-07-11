@@ -21,7 +21,7 @@ function useGetCurrentRate() {
     setRate(data?.data[pair]?.rate);
   }, [isSuccess, crypto, fiat, pair, location]);
 
-  return { rate };
+  return { rate, isSuccess };
 }
 
 export default useGetCurrentRate;
