@@ -1,37 +1,21 @@
-import Input from "../atoms/UserInput";
 import Button from "../atoms/UserButton";
 import { useNavigate } from "react-router-dom";
-import TextInput from "../atoms/TextInput";
 import CurrentRatePer1 from "../atoms/CurrentRatePer1";
+import TextInputLabel from "../atoms/TextInputLabel";
 
 const OurBank = () => {
   const navigate = useNavigate();
   const handleBank = () => {
-    navigate("/user/review");
+    navigate("/user/buy/receipt", { state: "buy" });
   };
 
   return (
     <div className="flex w-full flex-col gap-4">
-      <Input
-        inputType={"field"}
-        label="Kuda Bank"
-        value={"2019038333"}
-        noBorder
-        disabled
-      />
-      <Input
-        inputType={"field"}
-        label={"Sender Account Name"}
-        value={"Akazie Ebuka"}
-        disabled
-        noBorder
-      />
-      <Input
-        inputType={"field"}
-        label={"Sender Crypto Address"}
-        value={"0xBa01BBbbDe652Ae2ea99e61aFB4CD918ba144C64"}
-        disabled
-        noBorder
+      <TextInputLabel label="Kuda Bank" text="2019038333" />
+      <TextInputLabel label="Sender Account Name" text="Akazie Ebuka" />
+      <TextInputLabel
+        label="Sender Crypto Address"
+        text="0xBa01BBbbDe652Ae2ea99e61aFB4CD918ba144C64"
       />
       <CurrentRatePer1 />
 

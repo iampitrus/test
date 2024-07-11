@@ -1,6 +1,6 @@
 import Input from "../atoms/UserInput";
 import Button from "../atoms/UserButton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CurrentRatePer1 from "../atoms/CurrentRatePer1";
 
@@ -8,10 +8,16 @@ const Email = () => {
   const [emailAddress, setEmailAddress] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleBank = () => {
     if (!emailAddress) return;
-    navigate("/user/send-crypto");
+
+    if (location.state == "buy") {
+      navigate("/user/buy/review");
+    } else {
+      navigate("/user/sell/send-crypto");
+    }
   };
   return (
     <div className="flex w-full flex-col gap-10">

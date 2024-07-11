@@ -23,12 +23,12 @@ const SendCrypto = () => {
   };
 
   const handleNext = () => {
-    navigate("/user/review-sell");
+    navigate("/user/sell/review-sell");
   };
 
   return (
     <>
-      <div className="flex flex-col gap-10 h-full">
+      <div className="flex w-full flex-col gap-10 h-full">
         <div className="flex flex-col justify-between gap-2">
           <TextInput>Crypto Address</TextInput>
           <div className="flex items-center gap-5">
@@ -52,10 +52,6 @@ const SendCrypto = () => {
         </div>
         <div className="text-center">
           <TextInput>Rate exceed in 2mins: 44secs</TextInput>
-        </div>
-        <div>
-          <TextInput>Paying To</TextInput>
-          <h2 className="upppercase text-white">Akazie Ebuka</h2>
         </div>
         <Button onclick={handleNext}>I've made the deposit</Button>
       </div>

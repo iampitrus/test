@@ -17,7 +17,7 @@ const Sell = () => {
   const { rate } = useGetCurrentRate();
 
   const handleSell = () => {
-    navigate("/user/bank-details");
+    navigate("/user/sell/bank-details");
   };
 
   useEffect(() => {

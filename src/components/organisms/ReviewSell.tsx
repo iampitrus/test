@@ -7,6 +7,7 @@ import useGetCurrentRate from "../../hooks/useGetCurrentRate";
 import { useEffect, useState } from "react";
 import { useCreatePaymentMutation } from "../../api/offRamp";
 import ProcessTransactionModal from "./ProcessTransactionModal";
+import TextInputLabel from "../atoms/TextInputLabel";
 
 const ReviewSell = () => {
   const userDetails = useSelector(selectUser);
@@ -60,42 +61,31 @@ const ReviewSell = () => {
         />
       ) : (
         <div className="flex w-full h-fit flex-col gap-4">
-          <Input
-            disabled
-            inputType={"field"}
+          <TextInputLabel
             label="Your Bank Name"
-            value={acctDetails?.name}
+            text={`${acctDetails?.name}`}
           />
+
           <TextInput>{acctDetails?.accountname}</TextInput>
-          <Input
-            disabled
-            inputType={"field"}
-            label="Your Account Number"
-            value={acctDetails?.accountnumber}
+
+          <TextInputLabel
+            label="Your Account Name"
+            text={`${acctDetails?.accountname}`}
           />
+
           <TextInput>Transaction Details</TextInput>
           <TextInput className="font-bold">
             Before making payments, review your transaction information.
           </TextInput>
           <div className="flex justify-between items-center">
             <div className="flex flex-col gap-[3px]">
-              <TextInput>Amount in {fiat}</TextInput>
-              <Input
-                className={"w-[8rem] border-none font-bold bg-transparent"}
-                inputType={"main"}
-                placeholder={convertedAmt}
-              />
+              <TextInputLabel label={`Amount in ${fiat}`} text={convertedAmt} />
             </div>
             <div className="flex flex-col gap-[3px]">
-              <TextInput>Crypto Amount</TextInput>
-              <Input
-                className={"w-[8rem] border-none font-bold bg-transparent"}
-                inputType={"main"}
-                placeholder={`${amount} ${crypto}`}
-              />
+              <TextInputLabel label={`Amount in ${crypto}`} text={amount} />
             </div>
           </div>
-          <div className="mx-auto mt-8">
+          <div className="mt-8">
             <Button onclick={handleTransaction}>1've made the deposit</Button>
           </div>
         </div>

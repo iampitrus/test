@@ -1,7 +1,20 @@
+import { useLocation, useNavigate } from "react-router-dom";
+import CurrentRatePer1 from "../atoms/CurrentRatePer1";
 import TextInput from "../atoms/TextInput";
 import Input from "../atoms/UserInput";
+import { useState } from "react";
+import Button from "../atoms/UserButton";
 
 const Receipt = () => {
+  const [emailAddress, setEmailAddress] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClick = () => {
+    if (!emailAddress) return;
+    navigate(`${location.pathname}/review`);
+  };
   return (
     <div className="flex flex-col gap-4">
       <TextInput>
@@ -10,16 +23,13 @@ const Receipt = () => {
       </TextInput>
       <Input
         inputType={"field"}
-        label={"Email"}
-        value={"franktrade123@gmail.com"}
+        label="Address"
+        placeholder="Enter your email address"
+        value={emailAddress}
+        onChange={(e: any) => setEmailAddress(e.target.value)}
       />
-      <div className="w-full flex justify-between items-center">
-        <TextInput>Price</TextInput>
-        <div className="flex gap-[4px] items-center">
-          <p>1,000 NGN per 1 Usdt</p>
-          <div className="w-[20px] h-[20px] rounded-full bg-white"></div>
-        </div>
-      </div>
+      <CurrentRatePer1 />
+      <Button onclick={handleClick}>Confirm</Button>
     </div>
   );
 };

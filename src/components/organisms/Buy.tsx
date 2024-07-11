@@ -17,7 +17,7 @@ const Buy = () => {
   const navigate = useNavigate();
 
   const handleBuy = () => {
-    navigate("/user/ourbank");
+    navigate("/user/buy/ourbank");
   };
 
   useEffect(() => {

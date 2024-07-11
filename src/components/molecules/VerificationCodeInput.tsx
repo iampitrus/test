@@ -36,7 +36,7 @@ const VerificationCodeInput = () => {
     if (isSuccess) {
       dispatch(setUser(data));
       toast.success("Successfull!");
-      navigate("/user");
+      navigate("/user/buy");
     }
     if (isError) {
       toast.error("Error, pls try again");

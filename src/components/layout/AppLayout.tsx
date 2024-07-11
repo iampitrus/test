@@ -7,7 +7,7 @@ const AppLayout = () => {
       <img src={Logo} className="w-[10rem]" />
       <div className="flex justify-center items-center">
         <div
-          className="bg-boxcolor flex flex-col items-center gap-5 w-[350px] min-h-[510px]
+          className="bg-boxcolor flex flex-col items-center gap-5 w-[350px] min-h-[450px]
          p-[20px] rounded-3xl md:w-[450px]  border-none"
         >
           <Outlet />

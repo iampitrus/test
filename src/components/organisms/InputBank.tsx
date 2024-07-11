@@ -39,7 +39,7 @@ const InputBank = () => {
     if (!resolveSuccess) return;
 
     dispatch(setAcctDetails(resolveDetails?.data?.data));
-    navigate("/user/input-email");
+    navigate("/user/sell/receipt", { state: "sell" });
   };
 
   const verifyAccount = () => {
@@ -76,7 +76,7 @@ const InputBank = () => {
   }, [resolveError]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-6">
       <Select
         defaultValue={{
           value: accountDetails.code,
@@ -86,6 +86,17 @@ const InputBank = () => {
           setBankDetails({ ...bankDetails, bankCode: e.value })
         }
         options={options}
+        styles={{
+          control: (provided) => ({
+            ...provided,
+            backgroundColor: "#2C2D3A",
+            width: "100%",
+          }),
+          singleValue: (provided) => ({
+            ...provided,
+            color: "white",
+          }),
+        }}
       />
       <Input
         inputType={"field"}
