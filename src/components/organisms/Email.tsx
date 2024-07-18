@@ -1,23 +1,38 @@
-import TextInput from "../atoms/TextInput";
 import Input from "../atoms/UserInput";
 import Button from "../atoms/UserButton";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import CurrentRatePer1 from "../atoms/CurrentRatePer1";
 
 const Email = () => {
-  const handleBank = () => {};
+  const [emailAddress, setEmailAddress] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleBank = () => {
+    if (!emailAddress) return;
+
+    if (location.state == "buy") {
+      navigate("/user/buy/review");
+    } else {
+      navigate("/user/sell/send-crypto");
+    }
+  };
   return (
-    <div className="flex w-full flex-col gap-4">
+    <div className="flex w-full flex-col gap-10">
+      <p className="text-white text-center">
+        There is a fee associated on your exchange/ wallet; check that the fee
+        is included to your coin value before withdrawing
+      </p>
       <Input
         inputType={"field"}
         label="Address"
-        value={"franktrade123@gmail.com"}
+        placeholder="Enter your email address"
+        value={emailAddress}
+        onChange={(e: any) => setEmailAddress(e.target.value)}
       />
-      <div className="w-full flex justify-between items-center">
-        <TextInput>Price</TextInput>
-        <div className="flex gap-[4px] items-center">
-          <p>1,000 NGN per 1 Usdt</p>
-          <div className="w-[20px] h-[20px] rounded-full bg-white"></div>
-        </div>
-      </div>
+      <CurrentRatePer1 />
       <Button onclick={handleBank}>Confirm</Button>
     </div>
   );

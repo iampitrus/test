@@ -24,7 +24,7 @@ const Button = ({ children, onclick, type }: any) => {
       return (
         <button
           onClick={onclick}
-          className="flex justify-center items-center bg-secondary w-[250px]  p-[10px] font-bold rounded-2xl md:w-[400px]"
+          className="flex justify-center items-center bg-secondary w-full p-[10px] font-bold rounded-2xl"
         >
           {children}
         </button>

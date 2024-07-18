@@ -11,11 +11,11 @@ const Tab = () => {
     navigate("/user/sell");
   };
   const handleBuy = () => {
-    navigate("/user");
+    navigate("/user/buy");
   };
 
   useEffect(() => {
-    if (location.pathname === "/user") {
+    if (location.pathname === "/user/buy") {
       setActive("buy");
     } else if (location.pathname === "/user/sell") {
       setActive("sell");

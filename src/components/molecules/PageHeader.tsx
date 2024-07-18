@@ -7,7 +7,7 @@ const PageHeader = ({ children }: any) => {
   return (
     <div className="flex items-center gap-[5px]">
       <BsArrowLeft onClick={() => navigate(-1)} className="text-white" />
-      <TextInput>{children}</TextInput>
+      <TextInput className="text-2xl text-white">{children}</TextInput>
     </div>
   );
 };

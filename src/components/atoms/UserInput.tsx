@@ -1,54 +1,50 @@
-import { IoIosArrowDown } from "react-icons/io";
+import Dropdown from "./Dropdown";
+import { useDispatch } from "react-redux";
+import { setAmount } from "../../redux/userSlice";
 const Input = ({
   inputType,
   type,
   name,
   id,
-  onChange,
   placeholder,
   label,
-  value,
   className,
+  data,
+  value,
+  onChange,
+  convertedAmt,
+  disabled,
+  noBorder,
 }: any) => {
+  const dispatch = useDispatch();
+
+  function handleChange(e: any) {
+    // Store the input value so it can be used in other components
+    dispatch(setAmount(e.target.value));
+  }
+
   switch (inputType) {
     case "primary":
       return (
-        <label className="w-[250px] flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderPrimary md:w-[400px]">
-          <div className="flex justify-between w-[80px]  items-center">
-            <div className="flex items-center gap-[5px]">
-              <div className="w-[20px] h-[20px] rounded-full bg-white"></div>
-              <p className="font-bold text-white">USDC</p>
-            </div>
-
-            <div className="translate-x-[20px]">
-              <IoIosArrowDown className="text-white" />
-            </div>
-          </div>
+        <div className="w-full flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderPrimary md:w-[400px]">
+          <Dropdown dataType={data} />
           <input
-            className="w-[5rem] outline-none border-none bg-transparent"
+            className="w-full px-3 text-end text-white outline-none border-none bg-transparent"
             type={type}
             name={name}
             id={id}
-            onChange={onChange}
+            onChange={handleChange}
             placeholder="Amount"
           />
-        </label>
+        </div>
       );
     case "secondary":
       return (
-        <label className="w-[250px] flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderSecondary md:w-[400px]">
-          <div className="flex gap-[5px] items-center">
-            <div className="w-[20px] h-[20px] rounded-full bg-white"></div>
-            <p className="font-bold text-white">NGN</p>
-          </div>
-          <input
-            className="w-[5rem] outline-none border-none bg-transparent px-3"
-            type={type}
-            name={name}
-            id={id}
-            onChange={onChange}
-            placeholder="Amount"
-          />
+        <label className="w-full flex justify-between items-center border-[1px] p-[10px] rounded-2xl border-borderSecondary md:w-[400px]">
+          <Dropdown dataType={data} none />
+          <p className="w-full text-end outline-none border-none bg-transparent px-3 text-white">
+            {convertedAmt}
+          </p>
         </label>
       );
     case "field":
@@ -57,7 +53,16 @@ const Input = ({
           <label className="text-headercolor font-Poppins text-[14px]">
             {label}
           </label>
-          <h3 className="font-Rubik text-[16px] text-white">{value}</h3>
+          <input
+            disabled={disabled}
+            value={value}
+            type={type}
+            onChange={onChange}
+            className={`${
+              noBorder && "border-none"
+            } font-Rubik bg-transparent p-2 rounded-lg border text-[16px] text-white`}
+            placeholder={placeholder}
+          />
         </div>
       );
 

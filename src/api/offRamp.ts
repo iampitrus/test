@@ -1,20 +1,46 @@
 import { api } from ".";
 
 type Details = {
-  accountNumber: number;
-  bankCode: number;
+  accountNumber: string;
+  bankCode: string;
 };
 
-const authApi = api.injectEndpoints({
+export type Currencies = {
+  success: boolean;
+  data: {
+    incomingCurrencies: [];
+    outgoingCurrencies: [];
+  };
+};
+
+type Banks = {
+  success: boolean;
+  data: { Code: number; Name: string }[];
+};
+
+type InitPayment = {
+  businessId: string;
+  incomingCurrency: string;
+  incomingAmount: number;
+  outgoingCurrency: string;
+  paymentType: string;
+  country: string;
+  accountNumber: string;
+  accountName: string;
+  bank: string;
+  bankCode: string;
+};
+
+const offRampApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getSupportedCurrencies: builder.query<any, void>({
+    getSupportedCurrencies: builder.query<Currencies, void>({
       query: () => ({
         method: "GET",
         url: "off-ramp/get-supported-currencies",
       }),
     }),
 
-    getSupportedBanks: builder.query<any, void>({
+    getSupportedBanks: builder.query<Banks, void>({
       query: () => ({
         method: "GET",
         url: "off-ramp/get-supported-banks",
@@ -35,8 +61,14 @@ const authApi = api.injectEndpoints({
         body,
       }),
     }),
+    createPayment: builder.mutation({
+      query: (body: InitPayment) => ({
+        method: "POST",
+        url: "off-ramp/initiate-payment",
+        body,
+      }),
+    }),
   }),
-  overrideExisting: true,
 });
 
 export const {
@@ -44,4 +76,5 @@ export const {
   useGetSupportedBanksQuery,
   useGetSupportedCurrenciesQuery,
   useResolveBankMutation,
-} = authApi;
+  useCreatePaymentMutation,
+} = offRampApi;

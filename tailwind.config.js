@@ -21,10 +21,13 @@ export default {
         Poppins: '"Poppins", sans-serif',
         Rubik: '"Rubik", sans-serif',
       },
+      animation: {
+        "rotate-infinite": "spinner 2s linear infinite",
+      },
       keyframes: {
         spinner: {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
+          "0%": { transform: "rotate(360deg)" },
+          "100%": { transform: "rotate(0deg)" },
         },
       },
     },

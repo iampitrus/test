@@ -85,7 +85,7 @@ const OTPVerification: React.FC = () => {
     if (isSuccess) {
       dispatch(setUser(data));
       toast.success("Login Successful!");
-      navigate("/user");
+      navigate("/user/buy");
     }
     if (resendSuccess) toast.success("Token sent successfully!");
 
