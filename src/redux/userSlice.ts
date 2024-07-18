@@ -13,6 +13,7 @@ const initialState: {
     code: string;
   };
   newPaymentDetails: {};
+  walletAddress: string;
 } = {
   crypto: "BTC",
   fiat: "NGN",
@@ -20,6 +21,7 @@ const initialState: {
   amount: 0,
   acctDetails: { name: "", accountnumber: "", accountname: "", code: "" },
   newPaymentDetails: {},
+  walletAddress: "",
 };
 
 const userSlice = createSlice({
@@ -44,6 +46,9 @@ const userSlice = createSlice({
     setPaymentDetails: (state, action) => {
       state.newPaymentDetails = action.payload;
     },
+    setUserWalletAddress: (state, action) => {
+      state.walletAddress = action.payload;
+    },
   },
 });
 
@@ -56,6 +61,7 @@ export const {
   setAmount,
   setAcctDetails,
   setPaymentDetails,
+  setUserWalletAddress,
 } = userSlice.actions;
 
 export default userSlice.reducer;

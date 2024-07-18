@@ -10,7 +10,9 @@ import { selectUser } from "../../redux/userSlice";
 
 const Review = () => {
   const userDetails = useSelector(selectUser);
-  const { fiat, crypto, acctDetails, amount } = userDetails;
+  const { fiat, crypto, amount, walletAddress } = userDetails;
+
+  const currency = fiat === "NGN" ? "Naira" : "Dollar";
 
   const [convertedAmt, setConvertedAmt] = useState("");
   const { rate } = useGetCurrentRate();
@@ -19,16 +21,15 @@ const Review = () => {
     useCreatePaymentBuyMutation();
 
   const initalPaymentDetails = {
-    businessId: "remittance",
-    incomingCurrency: crypto,
-    incomingAmount: amount,
-    outgoingCurrency: fiat,
-    paymentType: "bank",
-    country: "NGN",
-    accountNumber: acctDetails?.accountnumber,
-    accountName: acctDetails?.accountname,
-    bank: acctDetails?.name,
-    bankCode: acctDetails?.code,
+    fullName: "cryptnance",
+    incomingCurrency: fiat,
+    outgoingCurrency: crypto,
+    amount,
+    rateKey: "rate",
+    network: "3131656942",
+    currency: fiat,
+    cryptoAddress: walletAddress,
+    fee: 60,
   };
 
   function handleBuy() {
@@ -51,21 +52,24 @@ const Review = () => {
       ) : (
         <div className="flex w-full flex-col gap-4">
           <TextInputLabel
-            label="Crypto Address"
-            text="0xBa01BBbbDe652Ae2ea99e61aFB4CD918ba144C64"
+            label={`Your ${crypto} crypto address`}
+            text={walletAddress}
           />
           <TextInput className="text-center">Transaction Details</TextInput>
           <TextInput className="font-bold text-red-600 text-center">
             Before making payments, review your transaction information.
           </TextInput>
           <div className="flex justify-between items-center">
-            <TextInputLabel label="Naira Amout" text={`${amount}`} />
+            <TextInputLabel
+              label={`${currency} Amount`}
+              text={`${amount} ${fiat}`}
+            />
             <TextInputLabel
               label="Crypto Amount"
               text={`${convertedAmt} ${crypto}`}
             />
           </div>
-          <TextInputLabel label="Account Sender Name" text="Akazie Ebuka" />
+          <TextInputLabel label="You sent to" text="Akazie Ebuka" />
           <Button onclick={handleBuy}>1've made the deposit</Button>
         </div>
       )}

@@ -1,16 +1,15 @@
 import { api } from ".";
 
 type InitPayment = {
-  businessId: string;
+  fullName: string;
   incomingCurrency: string;
-  incomingAmount: number;
   outgoingCurrency: string;
-  paymentType: string;
-  country: string;
-  accountNumber: string;
-  accountName: string;
-  bank: string;
-  bankCode: string;
+  amount: number;
+  rateKey: string;
+  network: string;
+  currency: string;
+  cryptoAddress: string;
+  fee: number;
 };
 
 const onRampApi = api.injectEndpoints({
